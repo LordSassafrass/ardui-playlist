@@ -5,7 +5,7 @@ from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 
 
 
-# logging.basicConfig(filename='spotify.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='spotify.log')
 
 file1 = open('spot_id.txt', 'r')
 ID = file1.readline()
@@ -31,7 +31,7 @@ def intake(playlist, uri):
     uri_list = []
     if 'album' in uri:
         album_tracks = spotify.album_tracks(
-                            album_id=re.search("(?<=album\/)[a-zA-Z0-9]*", str(uri))
+                            album_id=re.search(r'(?<=album\/)[a-zA-Z0-9]*', str(uri))[0]
                             )
         for i in album_tracks['items']:
             uri_list.append(i['uri'])
