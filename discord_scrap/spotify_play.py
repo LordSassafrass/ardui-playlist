@@ -30,8 +30,9 @@ spotify = spotipy.Spotify(
 def intake(playlist, uri):
     uri_list = []
     if 'album' in uri:
-        album_tracks = spotify.album_tracks(album_id=re.search("/(?<=album\/)[a-zA-Z0-9]*/gm",
-                            uri))
+        album_tracks = spotify.album_tracks(
+                            album_id=re.search("(?<=album\/)[a-zA-Z0-9]*", str(uri))
+                            )
         for i in album_tracks['items']:
             uri_list.append(i['uri'])
 

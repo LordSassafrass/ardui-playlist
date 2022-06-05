@@ -20,7 +20,8 @@ async def on_message(message):
     if "https://open.spotify.com" in message.content:
         parsed_uri = re.search("(?P<url>https?://[^\s]+)", message.content).group("url")
         message_send = "Adding to playlist {}".format(message.channel)
-        ss.intake(cl.channel_lookup[message.channel], parsed_uri)
+        playlist = cl.channel_lookup[str(message.channel)]
+        ss.intake(playlist, parsed_uri)
  #       logging.info(parsed_uri)
         await message.channel.send(message_send)
 
