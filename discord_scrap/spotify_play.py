@@ -1,5 +1,6 @@
 import spotipy
 import logging
+import re
 from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 
 
@@ -29,7 +30,8 @@ spotify = spotipy.Spotify(
 def intake(playlist, uri):
     uri_list = []
     if 'album' in uri:
-        album_tracks = spotify.album_tracks(album_id='4NDXeXypRq8YdFCKqg4sAn')
+        album_tracks = spotify.album_tracks(album_id=re.search("/(?<=album\/)[a-zA-Z0-9]*/gm",
+                            uri))
         for i in album_tracks['items']:
             uri_list.append(i['uri'])
 
@@ -41,5 +43,3 @@ def intake(playlist, uri):
 
 
     print(results)
-
-intake('5oMiDLcZteHBe7ivCvply1', 'https://open.spotify.com/album/4NDXeXypRq8YdFCKqg4sAn?si=mUqVajpkSRGcYZGgbasvAg')
