@@ -1,35 +1,28 @@
 import discord
-import os
-import time
+import re
+import logging
 
 client = discord.Client()
 
+logging.basicConfig(filename='discord.log', encoding='utf-8', level=logging.DEBUG)
+
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    logging.debug('We have logged in as {0.user}'.format(client))
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-
-async def get_history_of_channel(channel):
-    messages = await channel.history(limit=None) # adding None lets us retrieve every message
-    for message in messages:
-        # do something with that message
-        print(message.content)
-
+    if "https://open.spotify.com" in message.content:
+        parsed_uri = re.search("(?P<url>https?://[^\s]+)", message.content).group("url")
+        message_send = "Adding to playlist {}".format(message.channel)
+        logging.info(parsed_uri)
+        await message.channel.send(message_send)
 
 file1 = open('token.txt', 'r')
-client.run(file1.readline())
+TOKEN = file1.readline()
 file1.close()
 
-sleep(5000)
-
-for guild in client.guilds:
-    for chan in client.get_all_channels():
-        print(chan)
-        get_history_of_channel(chan)
+client.run(TOKEN)
