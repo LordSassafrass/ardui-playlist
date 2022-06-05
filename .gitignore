@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Remove token
-token.txt
+discord-scrap/token.txt
