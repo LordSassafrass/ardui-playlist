@@ -130,3 +130,6 @@ dmypy.json
 
 # Remove token
 discord-scrap/token.txt
+token.txt
+spot_id.txt
+spot_secret.txt

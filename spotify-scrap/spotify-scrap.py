@@ -2,9 +2,14 @@ import spotipy
 import os
 from spotipy.oauth2 import SpotifyClientCredentials
 
-
-client_id = os.environ['SPOTIPY_CLIENT_ID']
-client_secret = os.environ['SPOTIPY_CLIENT_ID']
+file1 = open('spot_id.txt', 'r')
+ID = file1.readline()
+file1.close()
+file1 = open('spot_secret.txt', 'r')
+SECRET = file1.readline()
+file1.close()
+client_id = ID
+client_secret = SECRET
 
 birdy_uri = 'spotify:artist:2WX2uTcsvV5OnS0inACecP'
 
