@@ -1,6 +1,10 @@
 import spotipy
-import os
-from spotipy.oauth2 import SpotifyClientCredentials
+import logging
+from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
+
+
+
+# logging.basicConfig(filename='spotify.log', encoding='utf-8', level=logging.DEBUG)
 
 file1 = open('spot_id.txt', 'r')
 ID = file1.readline()
@@ -11,19 +15,31 @@ file1.close()
 client_id = ID
 client_secret = SECRET
 
-birdy_uri = 'spotify:artist:2WX2uTcsvV5OnS0inACecP'
+creds = SpotifyClientCredentials(client_id=client_id,
+                                 client_secret=client_secret)
 
-creds = SpotifyClientCredentials(client_id = client_id,
-                                 client_secret = client_secret)
+spotify = spotipy.Spotify(
+    auth_manager=SpotifyOAuth(
+        scope="playlist-modify-private",
+        client_id=client_id,
+        client_secret=client_secret,
+        redirect_uri='http://localhost:8888/callback'
+    )
+)
+def intake(playlist, uri):
+    uri_list = []
+    if 'album' in uri:
+        album_tracks = spotify.album_tracks(album_id='4NDXeXypRq8YdFCKqg4sAn')
+        for i in album_tracks['items']:
+            uri_list.append(i['uri'])
+
+    elif 'track' in uri:
+        uri_list.append(uri)
+
+    results = spotify.playlist_add_items(playlist_id=playlist,
+                                         items=uri_list)
 
 
-spotify = spotipy.Spotify(client_credentials_manager= creds)
+    print(results)
 
-results = spotify.artist_albums(birdy_uri, album_type='album')
-albums = results['items']
-while results['next']:
-    results = spotify.next(results)
-    albums.extend(results['items'])
-
-for album in albums:
-    print(album['name'])
+intake('5oMiDLcZteHBe7ivCvply1', 'https://open.spotify.com/album/4NDXeXypRq8YdFCKqg4sAn?si=mUqVajpkSRGcYZGgbasvAg')
