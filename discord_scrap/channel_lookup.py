@@ -1,3 +1,21 @@
 channel_lookup = {
-    "test": "5oMiDLcZteHBe7ivCvply1"
+    "test": "5oMiDLcZteHBe7ivCvply1",
+    "instrumental": "54Zdawr14PqSpw0CwNwaYK",
+    "lo-fi": "3ZXckHSfZHpbTPb3xEo1Xo",
+    "mellow-rap": "5u4dA7O6vByLM7UBFKLdXB",
+    "bump-rap": "0NeJBMZKhr8q6qlqdNEvvv",
+    "aggro-rap": "1zI0bmL8fNHqitqsJ3jaBE",
+    "rnb": "1C1KCqlrVJOUsNjNOjbtPr",
+    "indie-alternative": "5wknbppRNInC9Vx9MbvoqT",
+    "punk": "1pbaoEprBiLMjEUg23eTMH",
+    "country": "7DlVz62HnjY7f5TwY9XfQ4",
+    "rock": "1Au2rYJ59WdwWDoPoysQaB",
+    "electronic": "4DnMquJR0RJh6k81U12Rjp",
+    "pop": "1rh8OjXVVoXqTyGbKBEdHC",
+    "international": "7lSCcmLHKlt11lN6y1fpTn",
+    "soundtracks": "2ZuuT4qjqFdC8ZSb4ONrJW",
+    "throwbacks": "6vmFgyf8b6t52jxsRbQFG9",
+    "primordial": "6wqdNPniBjpOfOg4GuFf6m",
+    "sea-shanties": "7yBwWdI447bm8mly2T8dNf",
+    "vocal": "3MKDqgcUU4nVrUNVFWdGF6"
 }
