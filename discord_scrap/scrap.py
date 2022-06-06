@@ -17,6 +17,9 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    elif message.content == "$status":
+        await message.channel.send("Everything seems to be aok.")
+
     elif message.content == "$refresh":
         await message.channel.send("Refreshing playlist this may take some time.")
         try:
@@ -30,8 +33,9 @@ async def on_message(message):
                     songs_uri.append(parsed_uri)
             ss.refresh(playlist, songs_uri)
         except KeyError:
+            await message.channel.send("............ mission failed")
             logging.error("playlist not found: {}".format(message.channel))
-
+        await message.channel.send("MISSION COMPLETE!")
         
 
     elif "https://open.spotify.com/album" in message.content or "https://open.spotify.com/track" in message.content:

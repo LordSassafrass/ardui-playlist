@@ -21,7 +21,7 @@ creds = SpotifyClientCredentials(client_id=client_id,
 
 spotify = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
-        scope="playlist-modify-private",
+        scope="playlist-modify-private playlist-modify-public",
         client_id=client_id,
         client_secret=client_secret,
         redirect_uri='http://localhost:8888/callback'
@@ -51,8 +51,12 @@ def refresh(playlist, items):
     # remove songs
     songs = []
     playlist_info = spotify.playlist(playlist)
+    print()
+    print(playlist_info)
+    print()
     for track in playlist_info['tracks']['items']:
-        songs.append(track['track']['uri'])
+        songs.append(track['track']['id'])
+    print(songs)
     spotify.playlist_remove_all_occurrences_of_items(playlist, songs)
     print("finished removal")
     # add back songs
