@@ -27,6 +27,7 @@ spotify = spotipy.Spotify(
         redirect_uri='http://localhost:8888/callback'
     )
 )
+
 def intake(playlist, uri):
     uri_list = []
     if 'album' in uri:
@@ -42,5 +43,18 @@ def intake(playlist, uri):
     results = spotify.playlist_add_items(playlist_id=playlist,
                                          items=uri_list)
 
-
     print(results)
+
+def refresh(playlist, items):
+    print(playlist)
+    print(items)
+    # remove songs
+    songs = []
+    playlist_info = spotify.playlist(playlist)
+    for track in playlist_info['tracks']['items']:
+        songs.append(track['track']['uri'])
+    spotify.playlist_remove_all_occurrences_of_items(playlist, songs)
+    print("finished removal")
+    # add back songs
+    for uri in items:
+        intake(playlist, uri)
