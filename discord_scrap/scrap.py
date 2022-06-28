@@ -20,14 +20,14 @@ async def on_message(message):
     elif message.content == "$status":
         try:
             items = ss.test()
-            print(items)
+            for track in items['tracks']['items']:
+                print(track['track']['id'])
             await message.channel.send("Everything seems to be aok.")
         except KeyError:
             logging.error("playlist not found: {}".format(message.channel))
         except:
             await message.channel.send("............ mission failed reason unknown")
 
-        await message.channel.send("Everything seems to be aok.")
 
     elif message.content == "$refresh":
         await message.channel.send("Refreshing playlist this may take some time.")
