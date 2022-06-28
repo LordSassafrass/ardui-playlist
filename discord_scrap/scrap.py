@@ -25,7 +25,8 @@ async def on_message(message):
             await message.channel.send("Everything seems to be aok. Here is a song from lofi: " + items['tracks']['items'][0]['track']['id'])
         except KeyError:
             logging.error("playlist not found: {}".format(message.channel))
-        except:
+        except Exception as e:
+            print(e)
             await message.channel.send("............ mission failed reason unknown")
 
 
