@@ -18,6 +18,15 @@ async def on_message(message):
         return
 
     elif message.content == "$status":
+        try:
+            items = ss.test()
+            print(items)
+            await message.channel.send("Everything seems to be aok.")
+        except KeyError:
+            logging.error("playlist not found: {}".format(message.channel))
+        except:
+            await message.channel.send("............ mission failed reason unknown")
+
         await message.channel.send("Everything seems to be aok.")
 
     elif message.content == "$refresh":
@@ -35,6 +44,8 @@ async def on_message(message):
         except KeyError:
             await message.channel.send("............ mission failed")
             logging.error("playlist not found: {}".format(message.channel))
+        except:
+            await message.channel.send("............ mission failed reason unknown")
         await message.channel.send("MISSION COMPLETE!")
         
 
@@ -48,6 +59,8 @@ async def on_message(message):
             await message.channel.send(message_send)
         except KeyError:
             logging.error("playlist not found: {}".format(message.channel))
+        except:
+            await message.channel.send("............ mission failed reason unknown")
 
 file1 = open('token.txt', 'r')
 TOKEN = file1.readline()

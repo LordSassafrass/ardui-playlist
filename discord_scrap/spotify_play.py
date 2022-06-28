@@ -62,3 +62,6 @@ def refresh(playlist, items):
     # add back songs
     for uri in items:
         intake(playlist, uri)
+
+def test():
+    return spotify.playlist("3ZXckHSfZHpbTPb3xEo1Xo")
