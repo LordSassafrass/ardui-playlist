@@ -24,7 +24,8 @@ spotify = spotipy.Spotify(
         scope="playlist-modify-private playlist-modify-public",
         client_id=client_id,
         client_secret=client_secret,
-        redirect_uri='http://localhost:8888/callback'
+        redirect_uri='http://localhost:8888/callback',
+        open_browser=False
     )
 )
 
